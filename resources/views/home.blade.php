@@ -21,6 +21,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/fondo.css') }}" rel="stylesheet">
   <link href="{{ asset('datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
@@ -31,11 +32,11 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #4C0305;">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #A1002C;">
       <div class="col-xs-12" style="height:35px;"></div>
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex p-4 mb-4 align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-text mx-3"><img src="{{ asset('img/logo-iesa.jpg')}}"></div>
+        <div class="sidebar-brand-text mx-3"><img src="{{ asset('img/logo-portada.jpg')}}"></div>
       </a>
       <div class="col-xs-12" style="height:45px;"></div>
       <!-- Divider -->
@@ -65,7 +66,7 @@
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Utilities Collapse Menu -->         
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-pencil-alt"></i>
@@ -150,18 +151,33 @@
 
       <!-- Main Content -->
       <div id="content">
-        <div class="col-lg-12 p-4 mb-3 form-inline" style="background-color: #4C0305;">             
-                <div class="col-md-10 text-center text-white">
-                  <span>
-                    <h2>Instituto de Estudios Superiores de Administración</h2>
-                  </span>
-                </div>
-        </div>
+     
         <!-- Topbar -->
-        <nav class="navbar navbar-expand d-flex navbar-light topbar mb-4 static-top shadow" style="background-color: #4C0305;">
-           <div class="p-4 col-lg-10">
-              <h1 class="h4 text-white text-center">Bienvenidos al Sistema de Control y Gestión Académica</h1>
-            </div>
+        <nav class="navbar navbar-expand d-flex navbar-light topbar mb-5 py-5 static-top shadow color-fondo">
+          <div class="col-sm-1">
+            <a href="http://www.aacsb.edu/" target="_blank">
+              <img src="{{ asset('img/logos/aacsb.png') }}" style="height: 60px; width: 60px;">           
+            </a>
+          </div>
+          <div>
+            <a href="http://www.mbaworld.com/" target="_blank">
+              <img src="{{ asset('img/logos/amba.png') }}" style="height: 90px; width: 90px;">
+            </a>
+          </div>
+          <div class="p-5 col-lg-7 text-center">              
+              <h2 class="m-2">Instituto de Estudios Superiores de Administración</h2>
+              <h4>Bienvenidos al Sistema de Control y Gestión Académica</h4>
+          </div>
+          <div class="col-sm-1">
+            <a href="http://www.efmd.org/" target="_blank">
+              <img src="{{ asset('img/logos/equis.png') }}" style="height: 60px; width: 60px;">           
+            </a>
+          </div>
+          <div>
+            <a href="http://www.naspaa.org/" target="_blank">
+              <img src="{{ asset('img/logos/naspaa.png') }}" style="height: 80px; width: 80px;">
+            </a>
+          </div>
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
@@ -175,8 +191,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-white small">{{ Auth::user()->name . " " .Auth::user()->lastname }}</span>
-                <img class="img-profile rounded-circle" src="">
+                <span class="mr-2 d-none d-lg-inline small text-dark">{{ Auth::user()->name . " " .Auth::user()->lastname }}</span>
+                <img class="img-profile rounded-circle" src="{{ asset('img/users/felipe.jpg') }}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
