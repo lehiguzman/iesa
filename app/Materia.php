@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Materia extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'cedula', 'nombre', 'apellido', 'correo', 'telefono', 'telefono_local', 'fecnac'
+        'nombre', 'descripcion', 'observacion', 'oferta_id'
     ];
 }

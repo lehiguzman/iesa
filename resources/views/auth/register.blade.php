@@ -40,6 +40,20 @@
               </div>
               <form class="user" method="POST" action="{{ route('register') }}">
                 @csrf
+                <div class="form-group row form-inline justify-content-center">
+                  <div class="mb-3 col-md-4">
+                    <select id="tipo_cedula" name="tipo_cedula" class="form-control">
+                      <option value="V">V</option>
+                      <option value="E">E</option>
+                    </select>
+                    <input type="text" class="form-control form-control-user" id="cedula" name="cedula" value="{{ old('cedula') }}" placeholder="Cedula" required autofocus>
+                     @if ($errors->has('cedula'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('cedula') }}</strong>
+                        </span>
+                    @endif                     
+                  </div>
+                </div>
                 <div class="form-group row justify-content-center">
                   <div class="mb-3 col-md-4">
                     <input type="text" class="form-control form-control-user " id="name" name="name" value="{{ old('name') }}" placeholder="Nombre" required autofocus>

@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Iesa - Login</title>
 
@@ -23,6 +24,9 @@
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/fondo.css') }}" rel="stylesheet">
   <link href="{{ asset('datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('dist/css/dropify.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('dist/fonts/*') }}">
 
 </head>
 
@@ -62,6 +66,10 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
             <a class="collapse-item" href="{{ url('/users') }}">Usuarios</a>            
+            <a class="collapse-item" href="{{ url('/ofertas') }}">Oferta Académica</a>
+            <a class="collapse-item" href="{{ url('/horarios') }}">Horarios</a>
+            <a class="collapse-item" href="{{ url('/periodos') }}">Abrir Oferta</a>
+            <a class="collapse-item" href="{{ url('/materias') }}">Plan de Estudio</a>
           </div>
         </div>
       </li>
@@ -74,10 +82,7 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="{{ url('/students') }}">Datos personales</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>            
           </div>
         </div>
       </li>
@@ -98,9 +103,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>            
+            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>          
           </div>
         </div>
       </li>      
@@ -192,7 +195,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline small text-dark">{{ Auth::user()->name . " " .Auth::user()->lastname }}</span>
-                <img class="img-profile rounded-circle" src="{{ asset('img/users/felipe.jpg') }}">
+                <img class="img-profile rounded-circle" src="{{ asset('storage/avatar/'.Auth::user()->avatar) }}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -289,7 +292,9 @@
   <script src="{{ asset('datatables/dataTables.bootstrap4.min.js') }}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+  <script src="{{ asset('js/scripts.js') }}"></script>
+
+  <script src="{{ asset('dist/js/dropify.js') }}"></script>
 
 </body>
 

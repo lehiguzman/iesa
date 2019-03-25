@@ -24,5 +24,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
 
 Route::resource('students', 'StudentController');
-//Route::get('/datest', 'StudentController@index')->name('index');
-//Route::get('/addest', 'StudentController@create')->name('create');
+Route::resource('ofertas', 'OfertaController');
+Route::resource('horarios', 'HorarioController');
+Route::resource('periodos', 'PeriodoController');
+Route::resource('materias', 'MateriaController');
+
+Route::post('/ajaxOfertas', 'PeriodoController@ajaxOfertas');
+Route::post('/ajaxHorarios', 'PeriodoController@ajaxHorarios');
+Route::post('/ajaxMaterias', 'MateriaController@ajaxMaterias');
+
+
+
+
+

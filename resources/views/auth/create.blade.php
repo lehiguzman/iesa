@@ -15,7 +15,7 @@
             <!-- Content Column -->
             <div class="col-lg-10 mb-4 text-center">
 
-		{!! Form::open(['route' => 'users.store', 'class' => 'user']) !!}
+		{!! Form::open(['route' => 'users.store', 'class' => 'user', 'enctype' => 'multipart/form-data']) !!}
 
             @include('auth.partials.form')
       

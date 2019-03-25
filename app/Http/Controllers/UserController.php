@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -15,7 +16,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('ID', 'DESC')->paginate();
+        if(Auth::user()->tipo == '1')
+        {
+            $users = User::orderBy('ID', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->tipo == '2' or Auth::user()->tipo == '3')
+        {            
+            $users = User::where('cedula', '=', Auth::user()->cedula)->get();       
+        }
+        else
+        {
+            return view('auth.error', compact('users'));
+        }
         return view('auth.index', compact('users'));
     }
 
@@ -38,13 +50,28 @@ class UserController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [            
+        return Validator::make($data, [  
+            'tipo_cedula' => 'required|string|max:2',          
+            'cedula' => 'required|string|max:15|unique:users',          
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',            
+            'avatar' => 'required|file|max:1024',
+            'email' => 'required|string|email|max:255|unique:users',
+            'tel_movil' => 'string|max:20',
+            'tel_local' => 'string|max:20',
+            'direccion' => 'string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
+    }
+
+
+    public function uploadFilePost(Request $request){        
+
+        $fileName = $request['cedula'].'.'.request()->avatar->getClientOriginalExtension();
+        $request->avatar->storeAs('avatar', $fileName);
+
+        return $fileName;
     }
 
 
@@ -57,29 +84,25 @@ class UserController extends Controller
     public function store(Request $request)
     {        
         $this->validator($request->all())->validate();
+
+        $file = $this->uploadFilePost($request);
         
             $data = $request;
-                User::create([                    
+                User::create([
+                    'tipo_cedula' => $data['tipo_cedula'],
+                    'cedula' => $data['cedula'],                
                     'name' => $data['name'],
                     'lastname' => $data['lastname'],
                     'username' => $data['username'],            
                     'email' => $data['email'],
-                    'tipo' => $data['tipo'],                    
+                    'tipo' => $data['tipo'], 
+                    'avatar' => $file,       
+                    'tel_movil' => $data['tel_movil'],              
+                    'tel_local' => $data['tel_local'],              
+                    'direccion' => $data['direccion'],              
                     'password' => bcrypt($data['password']),
                 ]);
         return redirect()->route('users.index')->with('message', 'Usuario agregado exitosamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = User::find($id);
-        return view('auth.show', compact('user'));
     }
 
     /**
@@ -103,15 +126,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::find($id);               
+
         if($user)
         {
+            $user->tipo_cedula = $request->tipo_cedula;
             $user->cedula = $request->cedula;
             $user->name = $request->name;
             $user->lastname = $request->lastname;
             $user->username = $request->username;    
             $user->email = $request->email;
-            $user->tipo = $request->tipo;            
+            $user->tipo = $request->tipo;
+            $user->tel_movil = $request->tel_movil;
+            $user->tel_local = $request->tel_local;
+            $user->direccion = $request->direccion;
+            if($request->hasFile('avatar')) 
+            {
+                $file = $this->uploadFilePost($request);
+                $user->avatar = $file;
+            }            
+            
             if($request->password) 
                 { 
                     Validator::make($request->all(), [
