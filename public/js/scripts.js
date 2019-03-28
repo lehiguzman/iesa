@@ -88,4 +88,21 @@ $(document).ready(function()
                 });
         
   });   
+
+  $('#tipoPerIns').change(function(e)
+  {          
+         e.preventDefault();        
+        var tipoPer = $("select[id=tipoPerIns]").val();          
+        $.ajax({                    
+                    url: '/ajaxInsPeriodo',
+                    type: 'POST',
+                    data:{tipoPer:tipoPer},
+                    dataType: 'html',
+                    success:function(data)
+                    {
+                        console.log(data);                        
+                        $('#selInsPeriodo').replaceWith(data);
+                    }                    
+                });       
+  });  
 });

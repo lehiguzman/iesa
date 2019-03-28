@@ -28,10 +28,12 @@ Route::resource('ofertas', 'OfertaController');
 Route::resource('horarios', 'HorarioController');
 Route::resource('periodos', 'PeriodoController');
 Route::resource('materias', 'MateriaController');
+Route::resource('inscriptions', 'InscriptionController');
 
 Route::post('/ajaxOfertas', 'PeriodoController@ajaxOfertas');
 Route::post('/ajaxHorarios', 'PeriodoController@ajaxHorarios');
 Route::post('/ajaxMaterias', 'MateriaController@ajaxMaterias');
+Route::post('/ajaxInsPeriodo', 'InscriptionController@ajaxInsPeriodo');
 
 
 

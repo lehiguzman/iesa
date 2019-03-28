@@ -68,8 +68,8 @@
             <a class="collapse-item" href="{{ url('/users') }}">Usuarios</a>            
             <a class="collapse-item" href="{{ url('/ofertas') }}">Oferta Académica</a>
             <a class="collapse-item" href="{{ url('/horarios') }}">Horarios</a>
-            <a class="collapse-item" href="{{ url('/periodos') }}">Abrir Oferta</a>
-            <a class="collapse-item" href="{{ url('/materias') }}">Plan de Estudio</a>
+            <a class="collapse-item" href="{{ url('/materias') }}">Contenidos</a>
+            <a class="collapse-item" href="{{ url('/periodos') }}">Abrir Oferta</a>            
           </div>
         </div>
       </li>
@@ -82,7 +82,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>            
+            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>
+            <a class="collapse-item" href="{{ url('/inscriptions') }}">Inscripción</a>            
           </div>
         </div>
       </li>
@@ -104,6 +105,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
             <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>          
+            <a class="collapse-item" href="{{ url('/users') }}">Notas</a>          
           </div>
         </div>
       </li>      
