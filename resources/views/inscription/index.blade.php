@@ -21,7 +21,10 @@
                   <thead>                    
                     <tr>
                       <th>Oferta</th>                      
-                      <th>Observación</th>                                           
+                      <th>Observación</th>      
+                      @if(Auth::user()->tipo == '1')                      
+                      <th></th>                     
+                      @endif                
                     </tr>
                   </thead>                 
                   <tbody>
@@ -32,9 +35,18 @@
                       <td><a href="{{ route('inscriptions.edit' , $inscription->id) }}">{{ $periodo->titulo }}</a></td>
                         @endif
                       @endforeach
-                      <td>{{ $inscription->observacion }}</td>                       
+                      <td>{{ $inscription->observacion }}</td> 
+                  @if(Auth::user()->tipo == '1')
+                      <td class="text-center">
+                        {!! Form::open(['route' => ['inscriptions.destroy' , $inscription->id], 'method' => 'DELETE']) !!}
+                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar la Inscripción?')) { this.type = 'submit'; }"><i class="fas fa-trash-alt"></i></button>
+                        {!! Form::close() !!}
+                      </td>
+                  @endif                      
                     </tr>
-                    @endforeach                  
+
+                 
+                    @endforeach
                    </tbody>
                 </table>
               </div>

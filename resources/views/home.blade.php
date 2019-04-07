@@ -55,8 +55,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-
+       @if(Auth::user()->tipo == 1)
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -73,7 +72,8 @@
           </div>
         </div>
       </li>
-
+      @endif
+      @if(Auth::user()->tipo == 3 or Auth::user()->tipo == 1)
       <!-- Nav Item - Utilities Collapse Menu -->         
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -87,7 +87,7 @@
           </div>
         </div>
       </li>
-
+     @endif
       <!-- Divider 
       <hr class="sidebar-divider">
 
@@ -95,7 +95,7 @@
       <div class="sidebar-heading">
         Addons
       </div> -->
-
+      @if(Auth::user()->tipo == 2 or Auth::user()->tipo == 1)
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -105,13 +105,13 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
             <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>          
-            <a class="collapse-item" href="{{ url('/users') }}">Notas</a>          
+            <a class="collapse-item" href="{{ url('/notas') }}">Notas</a>          
           </div>
         </div>
       </li>      
-
+      @endif
       <!-- Nav Item - Tables -->
-   <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
           <i class="fas fa-fw fa-table"></i>
           <span>Reportes</span>
@@ -200,23 +200,10 @@
                 <img class="img-profile rounded-circle" src="{{ asset('storage/avatar/'.Auth::user()->avatar) }}">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">                  
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Cerrar sesión
                 </a>
               </div>
             </li>
@@ -237,9 +224,9 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer fixed-bottom">
         <div class="container my-auto">
-          <div class="copyright text-center my-auto">
+          <div class="copyright my-auto text-center">
             <span>Copyright &copy; Iesa 2019</span>
           </div>
         </div>
@@ -259,15 +246,9 @@
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">        
+        <div class="modal-body">Selecciona "Salir" para cerrar tu sesión.</div>
         <div class="modal-footer">
           <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Salir</a>

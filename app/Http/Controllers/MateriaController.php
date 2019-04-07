@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Oferta;
+use App\User;
 use App\Materia;
 
 class MateriaController extends Controller
@@ -15,7 +16,7 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        $ofertas = Oferta::orderBy('ID', 'DESC')->paginate();
+        $ofertas = Oferta::orderBy('ID', 'DESC')->paginate();        
         return view('materia.index', compact('ofertas'));
     }
 
@@ -61,7 +62,8 @@ class MateriaController extends Controller
     {
         $oferta = Oferta::find($id);
         $materias = Materia::orderBy('ID', 'DESC')->paginate();
-        return view('materia.edit', compact('oferta', 'materias'));   
+        $users = User::where('tipo', 2)->get();
+        return view('materia.edit', compact('oferta', 'materias', 'users'));   
     }
 
     /**
@@ -73,10 +75,11 @@ class MateriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-                Materia::create([
+                Materia::create([                    
                     'nombre' => $data['nombre'],
                     'descripcion' => $data['descripcion'],                
                     'observacion' => $data['observacion'],                    
+                    'prof_id' => $data['user_id'],                    
                 ]);
         return redirect()->route('materias.index')->with('message', 'Oferta actualizada exitosamente');
     }
@@ -109,6 +112,7 @@ class MateriaController extends Controller
                     'descripcion' => $data['descripcion'],                
                     'observacion' => $data['observacion'], 
                     'oferta_id' => $data['oferta_id'],
+                    'prof_id' => $data['user_id'],
                 ]);           
 
         $materias = Materia::orderBy('ID', 'DESC')->paginate();

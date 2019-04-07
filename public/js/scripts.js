@@ -68,6 +68,7 @@ $(document).ready(function()
   {       
         e.preventDefault();        
         var oferta_id = $("input[name=oferta_id]").val();                  
+        var user_id = $("select[name=user_id]").val();                  
         var nombre = $("input[name=nombre]").val();                  
         var descripcion = $("textarea[name=descripcion]").val();                   
         var observacion = $("textarea[name=observacion]").val();          
@@ -75,7 +76,7 @@ $(document).ready(function()
         $.ajax({                    
                     url: '/ajaxMaterias',
                     type: 'POST',
-                    data:{nombre:nombre, descripcion:descripcion, observacion:observacion, oferta_id:oferta_id},
+                    data:{nombre:nombre, descripcion:descripcion, observacion:observacion, oferta_id:oferta_id, user_id:user_id},
                     dataType: 'html',
                     success:function(data)
                     {
@@ -83,6 +84,7 @@ $(document).ready(function()
                         document.getElementById('nombre').value = "";
                         document.getElementById('descripcion').value = "";
                         document.getElementById('observacion').value = "";
+                        document.getElementById('user_id').value = "";                        
                         $('#gridAsig').replaceWith(data);
                     }                    
                 });

@@ -29,6 +29,7 @@ Route::resource('horarios', 'HorarioController');
 Route::resource('periodos', 'PeriodoController');
 Route::resource('materias', 'MateriaController');
 Route::resource('inscriptions', 'InscriptionController');
+Route::resource('notas', 'NotaController');
 
 Route::post('/ajaxOfertas', 'PeriodoController@ajaxOfertas');
 Route::post('/ajaxHorarios', 'PeriodoController@ajaxHorarios');

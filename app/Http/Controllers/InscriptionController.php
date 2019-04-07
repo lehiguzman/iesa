@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Inscription;
 use App\Periodo;
 use App\Oferta;
+use Auth;
 
 class InscriptionController extends Controller
 {
@@ -16,7 +17,17 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::orderBy('ID', 'DESC')->paginate();   
+        $tipoUser = Auth::user()->tipo;
+        $idUser = Auth::user()->id;
+        if($tipoUser == 1)
+        {
+            $inscriptions = Inscription::orderBy('ID', 'DESC')->paginate();    
+        }
+        elseif($tipoUser == 3)
+        {
+            $inscriptions = Inscription::where('user_id', $idUser)->get();       
+        }        
+
         $periodos = Periodo::orderBy('ID', 'DESC')->paginate();        
         return view('inscription.index', compact('inscriptions', 'periodos'));
     }
@@ -40,10 +51,9 @@ class InscriptionController extends Controller
     public function store(Request $request)
     {
         $data = $request;
-                Inscription::create([
-                    'user_id' => $data['user_id'],
-                    'periodo_id' => $data['periodo_id'],
-                    'observacion' => $data['observacion'],                    
+                Inscription::updateOrCreate([
+                    'user_id' => $data['user_id'], 'periodo_id' => $data['periodo_id']],
+                    ['observacion' => $data['observacion'],                    
                 ]);
         return redirect()->route('inscriptions.index')->with('message', 'Inscripción agregada exitosamente');
     }
@@ -67,7 +77,12 @@ class InscriptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inscription = Inscription::find($id);        
+        $periodo = Periodo::find($inscription->periodo_id);
+        $periodos = Periodo::orderBy('ID', 'DESC')->paginate();
+        $oferta = Oferta::find($periodo->oferta_id);
+        $ofertas = Oferta::where('tipo', '=', $oferta->tipo)->get(); 
+        return view('inscription.edit', compact('inscription', 'oferta', 'ofertas', 'periodos'));
     }
 
     /**
@@ -79,7 +94,17 @@ class InscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inscription = Inscription::find($id);               
+
+        if($inscription)
+        {
+            $inscription->user_id = $request->user_id;
+            $inscription->periodo_id = $request->periodo_id;
+            $inscription->observacion = $request->observacion;
+            $inscription->save();         
+        }
+
+        return redirect()->route('inscriptions.index')->with('message', 'Inscripción actualizada exitosamente');       
     }
 
     /**
@@ -90,7 +115,8 @@ class InscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Inscription::destroy($id);
+        return redirect()->route('inscriptions.index')->with('message', 'Inscripción eliminada exitosamente');          
     }
 
      /**

@@ -20,6 +20,8 @@ class CreateMateriasTable extends Migration
             $table->string('observacion')->nullable();
             $table->unsignedInteger('oferta_id'); 
             $table->foreign('oferta_id')->references('id')->on('ofertas');
+            $table->unsignedInteger('prof_id'); 
+            $table->foreign('prof_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

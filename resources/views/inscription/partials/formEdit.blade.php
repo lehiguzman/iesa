@@ -1,70 +1,48 @@
 <div class="form-group row">
-    <div class="form-group form-inline justify-content-center col-sm-12">         
-        <H4>Oferta: {{ $oferta->nombre }}</H4>
-        <input type="hidden" name="oferta_id" value="{{ $oferta->id }}">
-    </div>
-    <form class="user form-group form-inline justify-content-center col-sm-12">                         
-            <input type="text" class="form-control-user form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }} col-sm-2 text-center" id="nombre" name="nombre" placeholder="Nombre de la Asignatura" required>
-            @if ($errors->has('nombre'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('nombre') }}</strong>
-                    </span>
-            @endif
-            <textarea id="descripcion" name="descripcion" class="form-control-user form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} col-sm-2 text-center" placeholder="Descripción de la asignatura"></textarea>
-            @if ($errors->has('descripcion'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('descripcion') }}</strong>
-                    </span>
-            @endif
-            <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-2 text-center" placeholder="Observación"></textarea>
-            @if ($errors->has('observacion'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('observacion') }}</strong>
-                    </span>
-            @endif
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-primary btn-user" id="addAsig">
-                Agregar
-            </button>        
-    </form> 
+<div class="form-group form-inline justify-content-center col-sm-12">         
+        <H4>Estudiante : {{ Auth::user()->name . " " .Auth::user()->lastname }}</H4>
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 </div>
-<div class="form-group row">     
-    <div class="col p-4"><hr></div>
-    <div class="col-auto p-4"><b>Contenidos</b></div>
-    <div class="col p-4"><hr></div>  
-    <div id="gridAsig" class="row col-sm-12">
-        <table id="tableAsig" class="table table-bordered table-stripe ">
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Observación</th>
-                <th></th>
-            </tr> 
-            @foreach($materias as $materia)     
-                @if($materia->oferta_id == $oferta->id)
-                    <tr>            
-                        <td>
-                            {{ $materia->nombre}}
-                        </td>
-                        <td>
-                            {{ $materia->descripcion}}
-                        </td>
-                        <td>
-                            {{ $materia->observacion }}
-                        </td>                 
-                        <td class="text-center">
-                                {!! Form::open(['route' => ['materias.destroy' , $materia->id], 'method' => 'DELETE', 'id' => 'formDelete']) !!}
-                                  <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar el Contenido?')) { document.getElementById('formDelete').submit(); }"><i class="fas fa-trash-alt"></i></button>
-                                {!! Form::close() !!}
-                        </td>                       
-                    </tr> 
-                @endif   
-            @endforeach                  
-        </table>    
-    </div>
+<div class="form-group form-inline justify-content-center col-sm-12">         
+    <select id="tipoPerIns" name="tipo" class="form-control">
+        <option value="" selected disabled>Seleccione tipo de oferta</option>
+        <option value="1" @if($oferta->tipo == 1) selected @endif>Postgrado</option>
+        <option value="2" @if($oferta->tipo == 2) selected @endif>Diplomado</option>
+        <option value="3" @if($oferta->tipo == 3) selected @endif>PAG</option>
+    </select>    
+    @if ($errors->has('tipo'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('tipo') }}</strong>
+            </span>
+    @endif
+</div>
+<div id="selInsPeriodo" class="form-group form-inline justify-content-center col-sm-12">
+    <select name="periodo_id" class="form-control">
+             <option id="">Seleccione oferta académica</option>
+        @foreach($ofertas as $oferta)
+            @foreach($periodos as $periodo)            
+                @if($oferta->id == $periodo->oferta_id)
+                    <option value="{{ $periodo->id }}" @if($periodo->id == $inscription->periodo_id) selected @endif>{{ $periodo->titulo }}</option>
+                @endif
+            @endforeach
+        @endforeach        
+    </select>
+</div>  
+<div class="form-group form-inline justify-content-center col-sm-12">                  
+    <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Comentario">{{ $inscription->observacion }}</textarea>
+    @if ($errors->has('observacion'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('observacion') }}</strong>
+            </span>
+    @endif
+</div>  
 <div class="form-group form-inline justify-content-center col-sm-12">
-<a href="{{ route('materias.index') }}" class="btn btn-danger btn-user">                
-     Salir
+<button type="submit" class="btn btn-primary btn-user" value="{{ __('Registrar') }}">
+    Registrar
+</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{{ route('inscriptions.index') }}" class="btn btn-danger btn-user">                
+     Cancelar
 </a>
 </div>
-</div>
+  

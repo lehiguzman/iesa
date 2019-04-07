@@ -9,13 +9,24 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('nombre') }}</strong>
                     </span>
-            @endif
+            @endif 
+            &nbsp;&nbsp;
+            <select id="user_id" name="user_id" class="form-control col-sm-2 text-center" >
+                <option value="">
+                    Seleccione Profesor
+                </option>
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
+                @endforeach
+            </select>
+            &nbsp;&nbsp;
             <textarea id="descripcion" name="descripcion" class="form-control-user form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} col-sm-2 text-center" placeholder="Descripción de la asignatura"></textarea>
             @if ($errors->has('descripcion'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('descripcion') }}</strong>
                     </span>
             @endif
+            &nbsp;&nbsp;
             <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-2 text-center" placeholder="Observación"></textarea>
             @if ($errors->has('observacion'))
                     <span class="invalid-feedback" role="alert">
