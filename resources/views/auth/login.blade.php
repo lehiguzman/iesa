@@ -47,10 +47,10 @@
                   <form class="user" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group col-md-12 form-inline justify-content-center">                       
-                        <input id="username" type="text" class="form-control form-control-user col-md-6" aria-describedby="emailHelp" name="username" value="{{ old('email') }}" placeholder="Ingrese su usuario" required autofocus>
-                         @if ($errors->has('username'))
+                        <input id="login" type="text" class="form-control form-control-user col-md-6" aria-describedby="emailHelp" name="login" value="{{ old('login') }}" placeholder="Ingrese su usuario" required autofocus>
+                         @if ($errors->has('login'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('username') }}</strong>
+                                <strong>{{ $errors->first('login') }}</strong>
                             </span>
                         @endif
                     </div>                                         

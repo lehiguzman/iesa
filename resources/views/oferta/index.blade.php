@@ -2,11 +2,10 @@
 
 @section('contenido')
 <!-- Project Card Example -->
-
-            <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Ofertas Académicas</h6>
+            <div class="card-header">
+              <h6 class="font-weight-bold text-primary text-center h2">Oferta Académica</h6>
             </div>
+            <div class="card shadow mb-4">            
             <div class="card-body">
               <div class="table-responsive">
                 <div class="align-items-center">

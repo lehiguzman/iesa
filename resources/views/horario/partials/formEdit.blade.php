@@ -21,9 +21,7 @@
     @endif
 </div>    
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="descripcion" name="descripcion" class="form-control-user form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Descripción del horario">
-        {{ $horario->descripcion }}
-    </textarea>
+    <textarea id="descripcion" name="descripcion" class="form-control-user form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Descripción del horario">{{ $horario->descripcion }}</textarea>
     @if ($errors->has('descripcion'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('descripcion') }}</strong>
@@ -31,9 +29,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Observación">        
-        {{ $horario->observacion }}
-    </textarea>
+    <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Observación">{{ $horario->observacion }}</textarea>
     @if ($errors->has('observacion'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('observacion') }}</strong>

@@ -19,16 +19,18 @@ class UserController extends Controller
         if(Auth::user()->tipo == '1')
         {
             $users = User::orderBy('ID', 'DESC')->paginate();
+            $valor = "Usuario";       
         }
         elseif(Auth::user()->tipo == '2' or Auth::user()->tipo == '3')
         {            
-            $users = User::where('cedula', '=', Auth::user()->cedula)->get();       
+            $users = User::where('cedula', '=', Auth::user()->cedula)->get();
+            $valor = "Datos personales";       
         }
         else
         {
             return view('auth.error', compact('users'));
         }
-        return view('auth.index', compact('users'));
+        return view('auth.index', compact('users', 'valor'));
     }
 
     /**

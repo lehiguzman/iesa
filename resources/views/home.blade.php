@@ -118,9 +118,7 @@
         </a>
         <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>            
+           <a class="collapse-item" href="{{ url('/notasIndex') }}">Notas</a>                                
           </div>
         </div>
       </li>      
@@ -133,9 +131,7 @@
         </a>
         <div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>            
+            <a class="collapse-item" href="{{ url('/notasReport') }}">Notas</a>                       
           </div>
         </div>
       </li>      
@@ -181,12 +177,9 @@
           <div>
             <a href="http://www.naspaa.org/" target="_blank">
               <img src="{{ asset('img/logos/naspaa.png') }}" style="height: 80px; width: 80px;">
-            </a>
-          </div>
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>          
+            </a>                 
+                            
+          </div>                 
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">                       
@@ -197,8 +190,11 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline small text-dark">{{ Auth::user()->name . " " .Auth::user()->lastname }}</span>
-                <img class="img-profile rounded-circle" src="{{ asset('storage/avatar/'.Auth::user()->avatar) }}">
-              </a>
+                <img class="img-profile rounded-circle" src="{{ asset('storage/avatar/'.Auth::user()->avatar) }}">                
+              </a>  
+              <div class="row my-0">
+                {{ now()->format('d/m/Y g:i A') }}
+              </div>            
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">                  
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -211,6 +207,7 @@
           </ul>
 
         </nav>
+
         <!-- End of Topbar -->
 
         

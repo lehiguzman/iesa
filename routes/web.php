@@ -37,6 +37,10 @@ Route::post('/ajaxMaterias', 'MateriaController@ajaxMaterias');
 Route::post('/ajaxInsPeriodo', 'InscriptionController@ajaxInsPeriodo');
 
 
+//Reportes
+Route::get('/notasIndex', 'ReportsController@notasIndex');
+Route::post('/notasReport', 'ReportsController@notasReport');
+
 
 
 
