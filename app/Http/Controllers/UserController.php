@@ -58,6 +58,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
+            'sexo' => 'required|string|max:2',          
             'avatar' => 'required|file|max:1024',
             'email' => 'required|string|email|max:255|unique:users',
             'tel_movil' => 'string|max:20',
@@ -97,6 +98,7 @@ class UserController extends Controller
                     'lastname' => $data['lastname'],
                     'username' => $data['username'],            
                     'email' => $data['email'],
+                    'sexo' => $data['sexo'],
                     'tipo' => $data['tipo'], 
                     'avatar' => $file,       
                     'tel_movil' => $data['tel_movil'],              
@@ -138,6 +140,7 @@ class UserController extends Controller
             $user->lastname = $request->lastname;
             $user->username = $request->username;    
             $user->email = $request->email;
+            $user->sexo = $request->sexo;
             $user->tipo = $request->tipo;
             $user->tel_movil = $request->tel_movil;
             $user->tel_local = $request->tel_local;

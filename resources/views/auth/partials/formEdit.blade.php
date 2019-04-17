@@ -27,6 +27,12 @@
             </span>
     @endif
 </div>  
+<div class="form-group form-inline justify-content-center col-sm-12">         
+    <select id="sexo" name="sexo" class="form-control">
+        <option value="M" @if($user->sexo == 'M') selected @endif>Hombre</option>
+        <option value="F" @if($user->sexo == 'F') selected @endif>Mujer </option>
+    </select>
+</div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
     <input type="text" class="form-control-user form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }} col-sm-4 text-center" id="username" name="username" value="{{ $user->username }}" placeholder="Usuario" required>
     @if ($errors->has('username'))

@@ -72,6 +72,13 @@
                     @endif   
                   </div>
                 </div>
+                <div class="form-group form-inline justify-content-center col-sm-12">         
+                  <select id="sexo" name="sexo" class="form-control">
+                    <option value="">Sexo</option>
+                    <option value="M">Hombre</option>
+                    <option value="F">Mujer</option>
+                  </select>
+                </div> 
                 <div class="form-group row justify-content-center">
                   <div class="mb-3 col-md-4">
                     <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Usuario" value="{{ old('username') }}" required>                   
@@ -97,7 +104,8 @@
                   <div class="col-md-4">
                     <input type="password" class="form-control form-control-user"  id="password-confirm" name="password_confirmation" placeholder="Comprobar contraseña" required>                            
                   </div>
-                </div>                                
+                </div>
+                <input type="hidden" name="tipo" id="tipo" value="1">                                
                 <div class="form-group form-inline justify-content-center">
                   <div class="col-md-4">
                       <button type="submit" class="btn btn-primary btn-user btn-lg justify-content-center">

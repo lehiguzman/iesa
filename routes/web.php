@@ -41,6 +41,13 @@ Route::post('/ajaxInsPeriodo', 'InscriptionController@ajaxInsPeriodo');
 Route::get('/notasIndex', 'ReportsController@notasIndex');
 Route::post('/notasReport', 'ReportsController@notasReport');
 
+Route::get('/ofertasIndex', 'ReportsController@ofertasIndex');
+Route::post('/ofertasReport', 'ReportsController@ofertasReport');
+
+//Graficos
+Route::get('/inscritos', 'InscritoController@index');
+Route::get('/inscritoXOferta', 'InscritoController@inscritoXOferta');
+
 
 
 

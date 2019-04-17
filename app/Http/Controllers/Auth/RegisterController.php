@@ -53,8 +53,9 @@ class RegisterController extends Controller
             'cedula' => ['required', 'string', 'max:15', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255','unique:users'],
+            'username' => ['required', 'string', 'max:255','unique:users'],            
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'sexo' => ['required', 'string', 'max:2'],            
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -74,6 +75,8 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'username' => $data['username'],
             'email' => $data['email'],
+            'tipo' => $data['tipo'],
+            'sexo' => $data['sexo'],
             'password' => Hash::make($data['password']),
         ]);
     }

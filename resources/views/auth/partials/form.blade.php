@@ -34,6 +34,13 @@
                 <strong>{{ $errors->first('username') }}</strong>
             </span>
     @endif
+</div> 
+<div class="form-group form-inline justify-content-center col-sm-12">         
+    <select id="sexo" name="sexo" class="form-control">
+        <option value="">Sexo</option>
+        <option value="M">Hombre</option>
+        <option value="F">Mujer</option>
+    </select>
 </div>                
 <div class="form-group form-inline justify-content-center col-sm-12">
     <input type="email" class="form-control-user form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-sm-4 text-center" id="email" name="email" placeholder="Correo electrónico" required>

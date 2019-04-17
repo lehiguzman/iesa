@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-{!! Form::open(['url' => '/notasReport', 'class' => 'user']) !!}
+{!! Form::open(['url' => '/ofertasReport', 'class' => 'user']) !!}
 
 <div class="form-group form-inline justify-content-center col-sm-12">         
     <select id="periodo" name="periodo" class="form-control">

@@ -10,12 +10,13 @@
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Iesa - Login</title>
+  <title>Iesa - Loginq</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json">
+
 
   <!-- Font awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -118,7 +119,8 @@
         </a>
         <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-           <a class="collapse-item" href="{{ url('/notasIndex') }}">Notas</a>                                
+           <a class="collapse-item" href="{{ url('/ofertasIndex') }}">Ofertas Académicas</a>
+           <a class="collapse-item" href="{{ url('/notasIndex') }}">Notas</a>
           </div>
         </div>
       </li>      
@@ -131,7 +133,8 @@
         </a>
         <div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="{{ url('/notasReport') }}">Notas</a>                       
+            <a class="collapse-item" href="{{ url('/inscritos') }}">Estudiante inscritos <br> &nbsp;&nbsp;&nbsp;&nbsp; por mes</a>
+            <a class="collapse-item" href="{{ url('/inscritoXOferta') }}">Estudiante inscritos <br> &nbsp;&nbsp;&nbsp;&nbsp; por Oferta</a>
           </div>
         </div>
       </li>      
@@ -221,10 +224,17 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer fixed-bottom">
+      <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright my-auto text-center">
-            <span>Copyright &copy; Iesa 2019</span>
+            
+
+            <span>Copyright &copy; Iesa 2019 - 
+              <a href="https://twitter.com/IESA" target="_blank">@iesa</a> 
+              <a href="https://twitter.com/cursosiesa" target="_blank">@cursosiesa</a> 
+              <a href="https://twitter.com/maestriasiesa" target="_blank">@maestriasiesa</a> 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              <a href="http://www.iesa.edu.ve/contactanos" target="_blank">CONTACTANOS</a></span>
           </div>
         </div>
       </footer>
