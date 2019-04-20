@@ -1,6 +1,6 @@
 <div class="form-group row">
 <div class="form-group form-inline justify-content-center col-sm-12">         
-        <H4>Estudiante : {{ Auth::user()->name . " " .Auth::user()->lastname }}</H4>
+        <H4>Estudiante : {{ $user->name . " " .$user->lastname }}</H4>
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 </div>
 <div class="form-group form-inline justify-content-center col-sm-12">         

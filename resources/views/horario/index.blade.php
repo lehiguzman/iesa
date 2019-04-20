@@ -49,8 +49,8 @@
                       
                       @if(Auth::user()->tipo == '1')
                       <td class="text-center">
-                        {!! Form::open(['route' => ['horarios.destroy' , $horario->id], 'method' => 'DELETE', 'id' => 'formDelete']) !!}
-                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar el Horario?')) { document.getElementById('formDelete').submit(); }"><i class="fas fa-trash-alt"></i></button>
+                        {!! Form::open(['route' => ['horarios.destroy' , $horario->id], 'method' => 'DELETE']) !!}
+                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar el Horario?')) { this.type = 'submit'; }"><i class="fas fa-trash-alt"></i></button>
                         {!! Form::close() !!}
                       </td>
                       @endif

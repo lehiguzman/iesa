@@ -8,8 +8,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-sm-flex align-items-center justify-content-center mb-4 col-lg-12">
-                        <h1 class="h3 mb-0 text-gray-800">Actualizar notas</h1>           
+                    <div class="d-sm-flex align-items-center justify-content-center mb-4 col-lg-12 breadcrumb">
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Actualizar notas</h1>           
                     </div>
                     <div class="card-body">
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Horario;
+use App\Bitacora;
+use Auth;
+
 
 class HorarioController extends Controller
 {
@@ -37,6 +40,12 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         $data = $request;
+        $user_id = Auth::user()->id;
+        $accion = 'Agrega horario';
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
                 Horario::create([
                     'tipo' => $data['tipo'],
                     'lapso' => $data['lapso'],                
@@ -72,6 +81,12 @@ class HorarioController extends Controller
 
         if($horario)
         {
+            $user_id = Auth::user()->id;
+            $accion = 'Edita horario  : id = '.$id;
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
             $horario->tipo = $request->tipo;
             $horario->lapso = $request->lapso;
             $horario->descripcion = $request->descripcion;
@@ -90,6 +105,13 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
+        $user_id = Auth::user()->id;
+        $accion = 'Elimina horario : id = '.$id;
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
+
         Horario::destroy($id);
         return redirect()->route('horarios.index')->with('message', 'Horario eliminado exitosamente');     
     }

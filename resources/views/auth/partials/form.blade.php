@@ -67,8 +67,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación">        
-    </textarea>
+    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación"></textarea>
     @if ($errors->has('direccion'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('direccion') }}</strong>

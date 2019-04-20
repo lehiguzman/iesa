@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Periodo;
 use App\Oferta;
 use App\Horario;
+use App\Bitacora;
+use Auth;
 
 class PeriodoController extends Controller
 {
@@ -42,6 +44,13 @@ class PeriodoController extends Controller
     public function store(Request $request)
     {
         $data = $request;
+
+        $user_id = Auth::user()->id;
+        $accion = 'Crea periodo de oferta académica';
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
                 Periodo::create([
                     'titulo' => $data['titulo'],
                     'cantidad' => $data['cantidad'],  
@@ -77,10 +86,16 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $periodo = Periodo::find($id);               
+        $periodo = Periodo::find($id);  
 
         if($periodo)
         {
+            $user_id = Auth::user()->id;
+            $accion = 'Edita periodo de oferta académica: id = '.$id;
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
             $periodo->titulo = $request->titulo;
             $periodo->cantidad = $request->cantidad;
             $periodo->descripcion = $request->descripcion;
@@ -101,6 +116,12 @@ class PeriodoController extends Controller
      */
     public function destroy($id)
     {
+        $user_id = Auth::user()->id;
+        $accion = 'Elimina oferta : id = '.$id;
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
         Periodo::destroy($id);
         return redirect()->route('periodos.index')->with('message', 'Oferta eliminada exitosamente');  
     }

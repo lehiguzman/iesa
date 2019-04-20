@@ -48,8 +48,8 @@
                       
                       @if(Auth::user()->tipo == '1')
                       <td class="text-center">
-                        {!! Form::open(['route' => ['ofertas.destroy' , $oferta->id], 'method' => 'DELETE', 'id' => 'formDelete']) !!}
-                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar la Oferta Académica?')) { document.getElementById('formDelete').submit(); }"><i class="fas fa-trash-alt"></i></button>
+                        {!! Form::open(['route' => ['ofertas.destroy' , $oferta->id], 'method' => 'DELETE']) !!}
+                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar la Oferta Académica?')) { this.type = 'submit'; }"><i class="fas fa-trash-alt"></i></button>
                         {!! Form::close() !!}
                       </td>
                       @endif

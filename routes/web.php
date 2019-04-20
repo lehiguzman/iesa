@@ -43,10 +43,13 @@ Route::post('/notasReport', 'ReportsController@notasReport');
 
 Route::get('/ofertasIndex', 'ReportsController@ofertasIndex');
 Route::post('/ofertasReport', 'ReportsController@ofertasReport');
+Route::get('/bitacorasIndex', 'ReportsController@bitacorasIndex');
+Route::post('/bitacorasReport', 'ReportsController@bitacorasReport');
 
 //Graficos
 Route::get('/inscritos', 'InscritoController@index');
 Route::get('/inscritoXOferta', 'InscritoController@inscritoXOferta');
+
 
 
 

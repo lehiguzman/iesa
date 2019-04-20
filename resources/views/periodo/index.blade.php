@@ -44,8 +44,9 @@
                       
                       @if(Auth::user()->tipo == '1')
                       <td class="text-center">
-                        {!! Form::open(['route' => ['periodos.destroy' , $periodo->id], 'method' => 'DELETE', 'id' => 'formDelete']) !!}
-                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar el periodo Académico?')) { document.getElementById('formDelete').submit(); }"><i class="fas fa-trash-alt"></i></button>
+                        {!! Form::open(['route' => ['periodos.destroy' , $periodo->id], 'method' => 'DELETE']) !!}
+                          <button type="button" class="btn btn-danger" onclick="if(confirm('¿Seguro de borrar el periodo Académico?')) 
+                            { this.type = 'submit'; }"><i class="fas fa-trash-alt"></i></button>
                         {!! Form::close() !!}
                       </td>
                       @endif

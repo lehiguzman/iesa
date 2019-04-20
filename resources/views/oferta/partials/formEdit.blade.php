@@ -2,9 +2,9 @@
 <div class="form-group form-inline justify-content-center col-sm-12">         
     <select id="tipo" name="tipo" class="form-control">
         <option value="" selected disabled>Seleccione tipo de oferta</option>
-        <option value="1">Postgrado</option>
-        <option value="2">Diplomado</option>
-        <option value="3">PAG</option>
+        <option value="1" @if($oferta->tipo == 1) selected @endif>Postgrado</option>
+        <option value="2" @if($oferta->tipo == 2) selected @endif>Diplomado</option>
+        <option value="3" @if($oferta->tipo == 3) selected @endif>PAG</option>
     </select>    
     @if ($errors->has('tipo'))
             <span class="invalid-feedback" role="alert">
@@ -31,9 +31,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Observación">        
-        {{ $oferta->observacion }}
-    </textarea>
+    <textarea id="observacion" name="observacion" class="form-control-user form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="Observación">{{ $oferta->observacion }}</textarea>
     @if ($errors->has('observacion'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('observacion') }}</strong>

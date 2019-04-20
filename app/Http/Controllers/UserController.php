@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Bitacora;
 use Auth;
 
 class UserController extends Controller
@@ -91,6 +92,12 @@ class UserController extends Controller
         $file = $this->uploadFilePost($request);
         
             $data = $request;
+            $user_id = Auth::user()->id;
+            $accion = 'Crea usuario';
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
                 User::create([
                     'tipo_cedula' => $data['tipo_cedula'],
                     'cedula' => $data['cedula'],                
@@ -133,7 +140,13 @@ class UserController extends Controller
         $user = User::find($id);               
 
         if($user)
-        {
+        {            
+            $accion = 'Edita usuario : id = '.$id;
+            $user_id = Auth::user()->id;
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
             $user->tipo_cedula = $request->tipo_cedula;
             $user->cedula = $request->cedula;
             $user->name = $request->name;
@@ -171,6 +184,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $user_id = Auth::user()->id;
+        $accion = 'Elimina usuario : id = '.$id;
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
         User::destroy($id);
         return redirect()->route('users.index')->with('message', 'Usuario eliminado exitosamente');        
     }

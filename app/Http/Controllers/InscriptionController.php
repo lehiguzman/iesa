@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Inscription;
 use App\Periodo;
 use App\Oferta;
+use App\Bitacora;
+use App\User;
 use Auth;
 
 class InscriptionController extends Controller
@@ -50,23 +52,18 @@ class InscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request;
+            $data = $request;
+            $user_id = Auth::user()->id;
+            $accion = 'Crea inscripcion';
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
                 Inscription::updateOrCreate([
                     'user_id' => $data['user_id'], 'periodo_id' => $data['periodo_id']],
                     ['observacion' => $data['observacion'],                    
                 ]);
         return redirect()->route('inscriptions.index')->with('message', 'Inscripción agregada exitosamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -82,7 +79,8 @@ class InscriptionController extends Controller
         $periodos = Periodo::orderBy('ID', 'DESC')->paginate();
         $oferta = Oferta::find($periodo->oferta_id);
         $ofertas = Oferta::where('tipo', '=', $oferta->tipo)->get(); 
-        return view('inscription.edit', compact('inscription', 'oferta', 'ofertas', 'periodos'));
+        $user = User::find($inscription->user_id);
+        return view('inscription.edit', compact('inscription', 'oferta', 'ofertas', 'periodos', 'user'));
     }
 
     /**
@@ -95,7 +93,12 @@ class InscriptionController extends Controller
     public function update(Request $request, $id)
     {
         $inscription = Inscription::find($id);               
-
+            $user_id = Auth::user()->id;
+            $accion = 'Edita inscripcion : id = '.$id;
+                Bitacora::create([
+                    'accion' => $accion,
+                    'user_id' => $user_id,            
+                ]);
         if($inscription)
         {
             $inscription->user_id = $request->user_id;
@@ -115,6 +118,12 @@ class InscriptionController extends Controller
      */
     public function destroy($id)
     {
+            $user_id = Auth::user()->id;
+            $accion = 'Elimina inscripcion : id = '.$id;
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
         Inscription::destroy($id);
         return redirect()->route('inscriptions.index')->with('message', 'Inscripción eliminada exitosamente');          
     }

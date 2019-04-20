@@ -5,7 +5,7 @@
 <head>
 
 	<title>Notas</title>
-
+	
 </head>
 
 <body>
@@ -22,10 +22,10 @@
 
 			<table border="2" width="90%" align="center">
 				<tr>
-					<th width="70%" align="center"></th>
+					<th width="70%" align="center">Alumno</th>
 					<th width="20%" align="center">Nota</th>
 				</tr>
-				
+				@foreach($notas as $nota)
 					@if($nota->materia_id == $materia->id)
 						<tr>
 							@foreach($users as $user)
@@ -36,7 +36,7 @@
 									<td align="center">{{ $nota->nota }}</td>	
 						</tr>	
 					 @endif
-				
+				@endforeach
 			</table>   
 	 <br>
 	@endforeach

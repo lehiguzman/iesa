@@ -2,10 +2,8 @@
 
 <html>
 
-<head>
-
-	<title>Oferta académica</title>
-
+<head>	
+	<title>Oferta académica</title>	
 </head>
 
 <body>

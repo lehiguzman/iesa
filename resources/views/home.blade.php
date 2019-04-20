@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -9,8 +9,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon"/>
 
-  <title>Iesa - Loginq</title>
+  <title>Iesa - Escuela de gerencia</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -40,7 +41,7 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #A1002C;">
       <div class="col-xs-12" style="height:35px;"></div>
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex p-4 mb-4 align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex p-4 mb-4 align-items-center justify-content-center" href="{{ url('/home') }}">
         <div class="sidebar-brand-text mx-3"><img src="{{ asset('img/logo-portada.jpg')}}"></div>
       </a>
       <div class="col-xs-12" style="height:45px;"></div>
@@ -49,7 +50,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ url('/home') }}">
           <i class="fas fa-fw fa-tablet"></i>
           <span>Menu Principal</span></a>
       </li>
@@ -121,6 +122,7 @@
           <div class="bg-white py-2 collapse-inner rounded">            
            <a class="collapse-item" href="{{ url('/ofertasIndex') }}">Ofertas Académicas</a>
            <a class="collapse-item" href="{{ url('/notasIndex') }}">Notas</a>
+           <a class="collapse-item" href="{{ url('/bitacorasIndex') }}">Bitacora</a>
           </div>
         </div>
       </li>      
@@ -199,7 +201,11 @@
                 {{ now()->format('d/m/Y g:i A') }}
               </div>            
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">                  
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">  
+                <a class="dropdown-item" href="http://virtual.iesa.edu.ve/servicios/" target="_blank">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Intranet
+                </a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Cerrar sesión
@@ -211,12 +217,9 @@
 
         </nav>
 
-        <!-- End of Topbar -->
+        <!-- End of Topbar -->        
 
-        
-
-              @yield('contenido')           
-
+              @yield('contenido')
            
         <!-- /.container-fluid -->
 

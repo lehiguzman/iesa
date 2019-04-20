@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Oferta;
 use App\User;
 use App\Materia;
+use App\Bitacora;
+use Auth;
 
 class MateriaController extends Controller
 {
@@ -31,28 +33,6 @@ class MateriaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -75,6 +55,12 @@ class MateriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+            $user_id = Auth::user()->id;
+            $accion = 'Crea materia';
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
                 Materia::create([                    
                     'nombre' => $data['nombre'],
                     'descripcion' => $data['descripcion'],                
@@ -92,6 +78,14 @@ class MateriaController extends Controller
      */
     public function destroy($id)
     {  
+            $user_id = Auth::user()->id;
+            $accion = 'Elimina materia : id = '.$id;
+
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
+
         $oferta = Materia::find($id);        
         Materia::destroy($id); 
         return redirect()->route('materias.edit', $oferta->oferta_id)->with('message', 'Oferta eliminada exitosamente');            
@@ -106,7 +100,13 @@ class MateriaController extends Controller
     public function ajaxMaterias(Request $request)
     { 
         $data = $request;       
-            
+        $user_id = Auth::user()->id;
+        $accion = 'Crea materia';
+
+            Bitacora::create([
+                'accion' => $accion,
+                'user_id' => $user_id,            
+            ]);
             Materia::create([
                     'nombre' => $data['nombre'],
                     'descripcion' => $data['descripcion'],                
