@@ -19,7 +19,7 @@ class CreateInscriptionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('periodo_id'); 
             $table->foreign('periodo_id')->references('id')->on('periodos');
-            $table->string('observacion'); 
+            $table->text('observacion')->nullable(); 
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 <div class="form-group row">
 <div class="form-group form-inline justify-content-center col-sm-12">         
-    <select id="tipoOfer" name="tipo" class="form-control">
+    <select id="tipoOfer" name="tipo" class="form-control" required>
         <option value="" selected disabled>Seleccione tipo de oferta</option>
         <option value="1">Postgrado</option>
         <option value="2">Diplomado</option>

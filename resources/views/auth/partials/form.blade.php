@@ -4,7 +4,7 @@
         <option value="V">V</option>
         <option value="E">E</option>
     </select>
-    <input type="text" class="form-control-user form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }} col-sm-3 text-center" id="cedula" name="cedula" placeholder="Cédula" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }} col-sm-3 text-center" id="cedula" name="cedula" placeholder="Cédula" value="{{ old('cedula') }}" required>
     @if ($errors->has('cedula'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('cedula') }}</strong>
@@ -12,7 +12,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <input type="text" class="form-control-user form-control{{ $errors->has('name') ? ' is-invalid' : '' }} col-sm-4 text-center" id="name" name="name" placeholder="Nombre" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('name') ? ' is-invalid' : '' }} col-sm-4 text-center" id="name" name="name" placeholder="Nombre"  value="{{ old('name') }}" required>
     @if ($errors->has('name'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('name') }}</strong>
@@ -20,7 +20,7 @@
     @endif
 </div>    
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <input type="text" class="form-control-user form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }} col-sm-4 text-center" id="lastname" name="lastname" placeholder="Apellido" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }} col-sm-4 text-center" id="lastname" name="lastname" placeholder="Apellido"  value="{{ old('lastname') }}" required>
     @if ($errors->has('lastname'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('lastname') }}</strong>
@@ -28,7 +28,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <input type="text" class="form-control-user form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }} col-sm-4 text-center" id="username" name="username" placeholder="Usuario" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('username') ? ' is-invalid' : '' }} col-sm-4 text-center" id="username" name="username" placeholder="Usuario"  value="{{ old('username') }}" required>
     @if ($errors->has('username'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('username') }}</strong>
@@ -36,14 +36,14 @@
     @endif
 </div> 
 <div class="form-group form-inline justify-content-center col-sm-12">         
-    <select id="sexo" name="sexo" class="form-control">
+    <select id="sexo" name="sexo" class="form-control" required>
         <option value="">Sexo</option>
         <option value="M">Hombre</option>
         <option value="F">Mujer</option>
     </select>
 </div>                
 <div class="form-group form-inline justify-content-center col-sm-12">
-    <input type="email" class="form-control-user form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-sm-4 text-center" id="email" name="email" placeholder="Correo electrónico" required>
+    <input type="email" class="form-control-user form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-sm-4 text-center" id="email" name="email" placeholder="Correo electrónico"  value="{{ old('email') }}" required>
     @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('email') }}</strong>
@@ -51,7 +51,7 @@
     @endif
 </div> 
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <input type="text" class="form-control-user form-control{{ $errors->has('tel_movil') ? ' is-invalid' : '' }} col-sm-4 text-center" id="tel_movil" name="tel_movil" placeholder="Telefono Móvil" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('tel_movil') ? ' is-invalid' : '' }} col-sm-4 text-center" id="tel_movil" name="tel_movil" placeholder="Telefono Móvil"  value="{{ old('tel_movil') }}">
     @if ($errors->has('tel_movil'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('tel_movil') }}</strong>
@@ -59,7 +59,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <input type="text" class="form-control-user form-control{{ $errors->has('tel_local') ? ' is-invalid' : '' }} col-sm-4 text-center" id="tel_local" name="tel_local" placeholder="Telefono Local" required>
+    <input type="text" class="form-control-user form-control{{ $errors->has('tel_local') ? ' is-invalid' : '' }} col-sm-4 text-center" id="tel_local" name="tel_local" placeholder="Telefono Local"  value="{{ old('tel_local') }}">
     @if ($errors->has('tel_local'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('tel_local') }}</strong>
@@ -67,7 +67,7 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación"></textarea>
+    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación">{{ old('direccion') }}</textarea>
     @if ($errors->has('direccion'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('direccion') }}</strong>
@@ -86,11 +86,11 @@
 @endif
 <div class="form-group form-inline justify-content-center col-sm-12">    
     <div class="col-sm-4">
-        <input class="dropify" type="file" name="avatar" id="avatar" data-height="60">   
+        <input class="dropify" type="file" name="avatar" id="avatar" data-height="60"  value="{{ old('avatar') }}">   
     </div>
 </div>
 <div class="form-group form-inline justify-content-center col-sm-12">
-    <input type="password" class="form-control-user form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-sm-4 text-center" id="password" name="password" placeholder="Password" required>
+    <input type="password" class="form-control-user form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-sm-4 text-center" id="password" name="password" placeholder="Password" required>    
     @if ($errors->has('password'))
         <span class="invalid-feedback" role="alert" >    
             <strong>{{ $errors->first('password') }}</strong>
@@ -98,8 +98,9 @@
     @endif
 </div>
 <div class="form-group form-inline justify-content-center col-sm-12">
-    <input type="password" class="form-control form-control-user col-sm-4 text-center" id="password-confirm" name="password_confirmation" placeholder="Comprobar contraseña" required>
+    <input type="password" class="form-control form-control-user col-sm-4 text-center" id="password-confirm" name="password_confirmation" placeholder="Confirmación de contraseña" required>    
 </div> 
+
 <div class="form-group form-inline justify-content-center col-sm-12">
 <button type="submit" class="btn btn-primary btn-user" value="{{ __('Registrar') }}">
     Registrar

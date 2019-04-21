@@ -23,7 +23,7 @@ class CreateNotasTable extends Migration
             $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->unsignedInteger('prof_id'); 
             $table->foreign('prof_id')->references('id')->on('users');
-            $table->string('nota')->nullable();
+            $table->integer('nota')->nullable();
             $table->timestamps();
         });
     }

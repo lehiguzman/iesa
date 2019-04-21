@@ -1,6 +1,6 @@
 <div class="form-group row">
 <div class="form-group form-inline justify-content-center col-sm-12">         
-    <select id="tipo" name="tipo" class="form-control">
+    <select id="tipo" name="tipo" class="form-control" required>
         <option value="" selected disabled>Seleccione tipo de horario</option>
         <option value="1">Diurno</option>
         <option value="2">Nocturno</option>

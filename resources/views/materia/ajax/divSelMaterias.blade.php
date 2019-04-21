@@ -1,9 +1,19 @@
 <div id="gridAsig" class="table table-bordered table-stripe">
+        <div class="align-items-center btn-success mb-4 text-center col-sm-12">
+        @if(Session::has('message'))
+            {{ Session::get('message') }}
+        @endif
+        </div>
+        <div class="align-items-center btn-danger mb-4 text-center col-sm-12">
+            @if(Session::has('error'))
+                {{ Session::get('error') }}
+            @endif
+        </div>
      <table id="tableAsig" class="table table-bordered table-stripe">
         <tr>
         <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Observación</th>
+        <th>Profesor</th>
+        <th>Salón</th>
         <th></th>
         </tr>   
         @foreach($materias as $materia) 
@@ -11,12 +21,20 @@
                  <tr>            
                     <td>
                         {{ $materia->nombre}}
+                    </td>                    
+                    <td>
+                        @foreach($users as $user)
+                            @if($materia->prof_id == $user->id)
+                                {{ $user->name }} {{ $user->lastname}}
+                            @endif
+                        @endforeach
                     </td>
                     <td>
-                        {{ $materia->descripcion}}
-                    </td>
-                    <td>
-                        {{ $materia->observacion }}
+                        @foreach($aulas as $aula)
+                            @if($materia->aula_id == $aula->id)
+                                {{ $aula->nombre }}
+                            @endif
+                        @endforeach
                     </td> 
                     <td class="text-center">                    
                       {!! Form::open(['route' => ['materias.destroy' , $materia->id], 'method' => 'DELETE', 'id' => 'formDelete']) !!}

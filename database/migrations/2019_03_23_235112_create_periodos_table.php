@@ -17,8 +17,8 @@ class CreatePeriodosTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->integer('cantidad');
-            $table->string('descripcion')->nullable();
-            $table->string('observacion')->nullable();        
+            $table->text('descripcion')->nullable();
+            $table->text('observacion')->nullable();        
             $table->unsignedInteger('oferta_id'); 
             $table->foreign('oferta_id')->references('id')->on('ofertas');    
             $table->unsignedInteger('horario_id'); 

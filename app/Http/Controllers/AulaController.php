@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
-use App\Horario;
+use App\Aula;
 use App\Bitacora;
 use Auth;
 
-
-class HorarioController extends Controller
+class AulaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class HorarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $horarios = Horario::orderBy('ID', 'DESC')->paginate();
-        return view('horario.index', compact('horarios'));
+    {        
+        $aulas = Aula::orderBy('ID', 'DESC')->paginate();
+        return view('aula.index', compact('aulas'));
     }
 
     /**
@@ -29,7 +28,7 @@ class HorarioController extends Controller
      */
     public function create()
     {
-        return view('horario.create');
+        return view('aula.create');
     }
 
     /**
@@ -42,20 +41,18 @@ class HorarioController extends Controller
     {
         $data = $request;
         $user_id = Auth::user()->id;
-        $accion = 'Agrega horario';
+        $accion = 'Agrega aula';
                 Bitacora::create([
                     'accion' => $accion,
                     'user_id' => $user_id,            
                 ]);
-                Horario::create([
-                    'tipo' => $data['tipo'],
-                    'lapso' => $data['lapso'],                
-                    'descripcion' => $data['descripcion'],
-                    'observacion' => $data['observacion'],                    
+                Aula::create([
+                    'nombre' => $data['nombre'],
+                    'capacidad' => $data['capacidad'],                
+                    'descripcion' => $data['descripcion']                    
                 ]);
-        return redirect()->route('horarios.index')->with('message', 'Horario agregado exitosamente');
+        return redirect()->route('aulas.index')->with('message', 'Salón agregado exitosamente');
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -65,8 +62,8 @@ class HorarioController extends Controller
      */
     public function edit($id)
     {
-        $horario = Horario::find($id);
-        return view('horario.edit', compact('horario'));  
+        $aula = Aula::find($id);
+        return view('aula.edit', compact('aula'));
     }
 
     /**
@@ -78,24 +75,23 @@ class HorarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $horario = Horario::find($id);               
+        $aula = Aula::find($id);               
 
-        if($horario)
+        if($aula)
         {
             $user_id = Auth::user()->id;
-            $accion = 'Edita horario  : id = '.$id;
+            $accion = 'Edita aula  : id = '.$id;
             Bitacora::create([
                 'accion' => $accion,
                 'user_id' => $user_id,            
             ]);
-            $horario->tipo = $request->tipo;
-            $horario->lapso = $request->lapso;
-            $horario->descripcion = $request->descripcion;
-            $horario->observacion = $request->observacion;
-            $horario->save();         
+            $aula->nombre = $request->nombre;
+            $aula->capacidad = $request->capacidad;
+            $aula->descripcion = $request->descripcion;            
+            $aula->save();         
         }
 
-        return redirect()->route('horarios.index')->with('message', 'Horario actualizado exitosamente');        
+        return redirect()->route('aulas.index')->with('message', 'Salón actualizado exitosamente');  
     }
 
     /**
@@ -107,19 +103,20 @@ class HorarioController extends Controller
     public function destroy($id)
     {
         $user_id = Auth::user()->id;
-        $accion = 'Elimina horario : id = '.$id;
+        $accion = 'Elimina aula : id = '.$id;
             Bitacora::create([
                 'accion' => $accion,
                 'user_id' => $user_id,            
             ]);
+
         try 
         {
-            Horario::destroy($id);
+            Aula::destroy($id);
         } 
         catch(QueryException $e) 
         {            
-            return redirect()->route('horarios.index')->with('error', 'Horario asociado a Oferta académica, no puede eliminarse');
-        }         
-        return redirect()->route('horarios.index')->with('message', 'Horario eliminado exitosamente');     
+            return redirect()->route('aulas.index')->with('error', 'Aula asociada a Materia, no puede eliminarse');
+        } 
+        return redirect()->route('aulas.index')->with('message', 'Salón eliminado exitosamente');  
     }
 }

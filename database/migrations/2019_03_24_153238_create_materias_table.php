@@ -16,12 +16,14 @@ class CreateMateriasTable extends Migration
         Schema::create('materias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('descripcion')->nullable();
-            $table->string('observacion')->nullable();
+            $table->text('descripcion')->nullable();
+            $table->text('observacion')->nullable();
             $table->unsignedInteger('oferta_id'); 
             $table->foreign('oferta_id')->references('id')->on('ofertas');
             $table->unsignedInteger('prof_id'); 
             $table->foreign('prof_id')->references('id')->on('users');
+            $table->unsignedInteger('aula_id'); 
+            $table->foreign('aula_id')->references('id')->on('aulas');
             $table->timestamps();
         });
     }

@@ -60,11 +60,8 @@ class UserController extends Controller
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'sexo' => 'required|string|max:2',          
-            'avatar' => 'required|file|max:1024',
-            'email' => 'required|string|email|max:255|unique:users',
-            'tel_movil' => 'string|max:20',
-            'tel_local' => 'string|max:20',
-            'direccion' => 'string|max:255',
+            'avatar' => 'file|max:1024',
+            'email' => 'required|string|email|max:255|unique:users',            
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -88,8 +85,12 @@ class UserController extends Controller
     public function store(Request $request)
     {        
         $this->validator($request->all())->validate();
+        $file="NULL";
 
-        $file = $this->uploadFilePost($request);
+        if($request->hasFile('avatar')) 
+            {
+                $file = $this->uploadFilePost($request);                
+            }
         
             $data = $request;
             $user_id = Auth::user()->id;

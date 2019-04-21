@@ -70,7 +70,8 @@
             <a class="collapse-item" href="{{ url('/ofertas') }}">Oferta Académica</a>
             <a class="collapse-item" href="{{ url('/horarios') }}">Horarios</a>
             <a class="collapse-item" href="{{ url('/materias') }}">Contenidos</a>
-            <a class="collapse-item" href="{{ url('/periodos') }}">Abrir Oferta</a>            
+            <a class="collapse-item" href="{{ url('/periodos') }}">Abrir Oferta</a>
+            <a class="collapse-item" href="{{ url('/aulas') }}">Salones</a>                        
           </div>
         </div>
       </li>
@@ -107,7 +108,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
             <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>          
-            <a class="collapse-item" href="{{ url('/notas') }}">Notas</a>          
+            <a class="collapse-item" href="{{ url('/notas') }}">Notas</a>             
           </div>
         </div>
       </li>      
@@ -119,10 +120,17 @@
           <span>Reportes</span>
         </a>
         <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">            
-           <a class="collapse-item" href="{{ url('/ofertasIndex') }}">Ofertas Académicas</a>
+          <div class="bg-white py-2 collapse-inner rounded">          
+           <a class="collapse-item" href="{{ url('/ofertasIndex') }}">Ofertas Académicas</a>          
+          @if(Auth::user()->tipo == 2 or Auth::user()->tipo == 1)        
            <a class="collapse-item" href="{{ url('/notasIndex') }}">Notas</a>
+          @endif
+          @if(Auth::user()->tipo == 3 or Auth::user()->tipo == 1)        
+           <a class="collapse-item" href="{{ url('/calificacionesIndex') }}">Calificaciones</a>
+          @endif
+          @if(Auth::user()->tipo == 1)         
            <a class="collapse-item" href="{{ url('/bitacorasIndex') }}">Bitacora</a>
+          @endif
           </div>
         </div>
       </li>      

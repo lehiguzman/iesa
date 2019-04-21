@@ -8,32 +8,22 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">         
-    <select id="tipoOferta" name="tipo" class="form-control">
+    <select id="tipoOferta" class="form-control" required>
         <option value="" selected disabled>Seleccione tipo de oferta</option>
         <option value="1">Postgrado</option>
         <option value="2">Diplomado</option>
         <option value="3">PAG</option>
     </select>    
-    @if ($errors->has('tipo'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('tipo') }}</strong>
-            </span>
-    @endif
 </div>  
 <div id="divSelOfertas">    
 </div>    
 <div class="form-group form-inline justify-content-center col-sm-12">         
-    <select id="tipoHorario" name="tipo" class="form-control">
+    <select id="tipoHorario" class="form-control" required>
         <option value="" selected disabled>Seleccione tipo de horario</option>
         <option value="1">Diurno</option>
         <option value="2">Nocturno</option>
         <option value="3">Fin de Semana</option>
     </select>    
-    @if ($errors->has('tipo'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('tipo') }}</strong>
-            </span>
-    @endif
 </div>
 <div id="divSelHorarios">    
 </div>  

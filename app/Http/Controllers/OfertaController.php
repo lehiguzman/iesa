@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use App\Oferta;
 use App\Bitacora;
 use Auth;
@@ -106,13 +107,21 @@ class OfertaController extends Controller
     public function destroy($id)
     {
         $user_id = Auth::user()->id;
-        $accion = 'Elimina oferta : id = '.$id;
-                Bitacora::create([
+        $accion = 'Elimina oferta : id = '.$id;               
+
+        try 
+        {            
+            Oferta::destroy($id);
+            Bitacora::create([
                     'accion' => $accion,
                     'user_id' => $user_id,            
                 ]);
-
-        Oferta::destroy($id);
+        } 
+        catch(QueryException $e) 
+        {            
+            return redirect()->route('ofertas.index')->with('error', 'Oferta asociada a Materias, no puede eliminarse');
+        } 
+        
         return redirect()->route('ofertas.index')->with('message', 'Oferta eliminada exitosamente');     
     }
 }

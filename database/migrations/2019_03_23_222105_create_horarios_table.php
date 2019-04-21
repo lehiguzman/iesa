@@ -17,8 +17,8 @@ class CreateHorariosTable extends Migration
             $table->increments('id');
             $table->integer('tipo');
             $table->string('lapso');
-            $table->string('descripcion')->nullable();
-            $table->string('observacion')->nullable();
+            $table->text('descripcion')->nullable();
+            $table->text('observacion')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Periodo;
 use App\Nota;
 use App\User;
 use App\Materia;
+use App\Inscription;
 use App\Horario;
 use App\Bitacora;
 use Auth;
@@ -22,14 +23,12 @@ class ReportsController extends Controller
      */
     public function notasIndex()
     {
-        $prof_id = Auth::user()->id;
-        $materias = DB::table('materias')
-                        ->select('oferta_id')
-                        ->distinct()->get();
-                        
+        $prof_id = Auth::user()->id;                        
 
-        //Materia::where('prof_id', $prof_id)->groupBy('oferta_id')->get();
-        //dd($materias);
+        $materias = DB::table('materias')
+                        ->groupBy('oferta_id')
+                        ->having('prof_id', '=', $prof_id)->get();
+        
         $periodos = Periodo::orderBy('ID', 'DESC')->paginate();
 
         return view('reports.notas', compact('periodos', 'materias'));
@@ -132,5 +131,45 @@ class ReportsController extends Controller
         $pdf = PDF::loadView('reports.bitacorasPdf', $datos);
         return $pdf->stream('contenidos.pdf');        
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function calificacionesIndex(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        $inscriptions = Inscription::where('user_id', $user_id)->get();
+        $periodos = Periodo::orderBy('ID', 'DESC')->paginate();
+        return view('reports.calificaciones', compact('inscriptions','periodos'));    
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function calificacionesReport(Request $request)
+    {        
+        $data = $request;
+
+        $user_id = Auth::user()->id;
+       
+        $user = User::find($user_id);          
+        $notas = Nota::where('user_id', $user_id)->where('periodo_id', $data['periodo_id'])->get();     
+        $materias = Materia::orderBy('ID', 'DESC')->paginate();
+        $periodos = Periodo::orderBy('ID', 'DESC')->paginate();
+
+        $datos = ['notas' => $notas,
+                  'user' => $user,
+                  'materias' => $materias,
+                  'periodos' => $periodos];
+
+        $pdf = PDF::loadView('reports.calificacionesPdf', $datos);
+        return $pdf->stream('calificaciones.pdf');        
+    }
+    
 
 }

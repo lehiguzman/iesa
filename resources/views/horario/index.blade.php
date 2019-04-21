@@ -9,9 +9,14 @@
             <div class="card shadow mb-4">          
             <div class="card-body">
               <div class="table-responsive">
-                <div class="align-items-center">
+                <div class="align-items-center btn-success mb-4 text-center h-3">
                   @if(Session::has('message'))
                     {{ Session::get('message') }}
+                  @endif
+                </div>
+                <div class="align-items-center btn-danger mb-4 text-center">
+                  @if(Session::has('error'))
+                     {{ Session::get('error') }}
                   @endif
                 </div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('error', function(){ 
+    abort(500);
+});
+
 ////////////////Administración////////////////////
 //Usuarios
 Route::resource('users', 'UserController');
@@ -30,6 +34,7 @@ Route::resource('periodos', 'PeriodoController');
 Route::resource('materias', 'MateriaController');
 Route::resource('inscriptions', 'InscriptionController');
 Route::resource('notas', 'NotaController');
+Route::resource('aulas', 'AulaController');
 
 Route::post('/ajaxOfertas', 'PeriodoController@ajaxOfertas');
 Route::post('/ajaxHorarios', 'PeriodoController@ajaxHorarios');
@@ -45,6 +50,8 @@ Route::get('/ofertasIndex', 'ReportsController@ofertasIndex');
 Route::post('/ofertasReport', 'ReportsController@ofertasReport');
 Route::get('/bitacorasIndex', 'ReportsController@bitacorasIndex');
 Route::post('/bitacorasReport', 'ReportsController@bitacorasReport');
+Route::get('/calificacionesIndex', 'ReportsController@calificacionesIndex');
+Route::post('/calificacionesReport', 'ReportsController@calificacionesReport');
 
 //Graficos
 Route::get('/inscritos', 'InscritoController@index');

@@ -66,16 +66,14 @@
     @endif
 </div>  
 <div class="form-group form-inline justify-content-center col-sm-12">                  
-    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación">
-        {{ $user->direccion }}
-    </textarea>
+    <textarea id="direccion" name="direccion" class="form-control-user form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }} col-sm-4 text-center" placeholder="dirección de habitación">{{ $user->direccion }}</textarea>
     @if ($errors->has('tel_movil'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('tel_movil') }}</strong>
             </span>
     @endif
 </div>  
-@if(Auth::user()->tipo == 1)         
+@if(Auth::user()->tipo == 1)       
 <div class="form-group form-inline justify-content-center col-sm-10">
     <select class="form-control col-sm-2"  id="tipo" name="tipo" required>
             <option value="" @if($user->tipo == "") selected="selected" @endif disabled>
@@ -92,7 +90,10 @@
             </option>
     </select>
 </div>
+@else
+    <input type="hidden" name="tipo" value="{{ $user->tipo }}">
 @endif
+
 <div class="form-group form-inline justify-content-center col-sm-12">    
     <div class="col-sm-4">
         <input class="dropify" type="file" name="avatar" id="avatar" data-height="60" data-default-file="{{ asset('storage/avatar/'.$user->avatar) }}">   
@@ -107,7 +108,7 @@
     @endif
 </div>
 <div class="form-group form-inline justify-content-center col-sm-12">
-    <input type="password" class="form-control form-control-user col-sm-4 text-center" id="password-confirm" name="password_confirmation" placeholder="Comprobar contraseña">
+    <input type="password" class="form-control form-control-user col-sm-4 text-center" id="password-confirm" name="password_confirmation" placeholder="Confirmación de contraseña">
 </div> 
 <div class="form-group form-inline justify-content-center col-sm-12">
 <button type="submit" class="btn btn-primary btn-user" value="{{ __('Registrar') }}">

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use App\Oferta;
 use App\User;
 use App\Materia;
 use App\Bitacora;
+use App\Aula;
 use Auth;
 
 class MateriaController extends Controller
@@ -43,7 +45,9 @@ class MateriaController extends Controller
         $oferta = Oferta::find($id);
         $materias = Materia::orderBy('ID', 'DESC')->paginate();
         $users = User::where('tipo', 2)->get();
-        return view('materia.edit', compact('oferta', 'materias', 'users'));   
+        $aulas = Aula::orderBy('ID', 'DESC')->paginate();
+
+        return view('materia.edit', compact('oferta', 'materias', 'users', 'aulas'));   
     }
 
     /**
@@ -66,6 +70,7 @@ class MateriaController extends Controller
                     'descripcion' => $data['descripcion'],                
                     'observacion' => $data['observacion'],                    
                     'prof_id' => $data['user_id'],                    
+                    'aula_id' => $data['aula_id'],                    
                 ]);
         return redirect()->route('materias.index')->with('message', 'Oferta actualizada exitosamente');
     }
@@ -79,15 +84,23 @@ class MateriaController extends Controller
     public function destroy($id)
     {  
             $user_id = Auth::user()->id;
-            $accion = 'Elimina materia : id = '.$id;
+            $accion = 'Elimina materia : id = '.$id;           
 
+        $oferta = Materia::find($id);       
+
+        try 
+        {            
+            Materia::destroy($id); 
             Bitacora::create([
                 'accion' => $accion,
                 'user_id' => $user_id,            
             ]);
-
-        $oferta = Materia::find($id);        
-        Materia::destroy($id); 
+        } 
+        catch(QueryException $e) 
+        {            
+            return redirect()->route('materias.edit', $oferta->oferta_id)->with('error', 'Materia asociada a Notas, no puede eliminarse');
+        } 
+        
         return redirect()->route('materias.edit', $oferta->oferta_id)->with('message', 'Oferta eliminada exitosamente');            
     }
 
@@ -113,10 +126,14 @@ class MateriaController extends Controller
                     'observacion' => $data['observacion'], 
                     'oferta_id' => $data['oferta_id'],
                     'prof_id' => $data['user_id'],
+                    'aula_id' => $data['aula_id']
                 ]);           
 
         $materias = Materia::orderBy('ID', 'DESC')->paginate();
+        $aulas = Aula::orderBy('ID', 'DESC')->paginate();        
+        $users = User::orderBy('ID', 'DESC')->paginate();        
         $oferta = Oferta::find($data['oferta_id']);
-        return view('materia.ajax.divSelMaterias', compact('materias', 'oferta'));
+
+        return view('materia.ajax.divSelMaterias', compact('materias', 'oferta', 'aulas', 'users'));
     }
 }
