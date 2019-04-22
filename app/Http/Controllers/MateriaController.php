@@ -113,12 +113,12 @@ class MateriaController extends Controller
     public function ajaxMaterias(Request $request)
     { 
         $data = $request;       
-        $user_id = Auth::user()->id;
+        //$user_id = Auth::user()->id;      
         $accion = 'Crea materia';
 
             Bitacora::create([
                 'accion' => $accion,
-                'user_id' => $user_id,            
+                'user_id' => $data['user_id'],            
             ]);
             Materia::create([
                     'nombre' => $data['nombre'],

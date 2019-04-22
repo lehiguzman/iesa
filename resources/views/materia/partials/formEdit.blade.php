@@ -11,6 +11,7 @@
                     </span>
             @endif 
             &nbsp;&nbsp;
+@if(Auth::user()->tipo == 1) 
             <select id="user_id" name="user_id" class="form-control col-sm-2 text-center" required>
                 <option value="">
                     Seleccione Profesor
@@ -27,6 +28,10 @@
                 @endforeach
             </select>
             &nbsp;&nbsp;
+@else
+        <input type="hidden" name="user_id" id="user_id"  value="{{ Auth::user()->tipo }}">
+        <input type="hidden" name="aula_id" id="aula_id" value="1">
+@endif
             <textarea id="descripcion" name="descripcion" class="form-control-user form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} col-sm-2 text-center" placeholder="Descripción de la asignatura"></textarea>
             @if ($errors->has('descripcion'))
                     <span class="invalid-feedback" role="alert">

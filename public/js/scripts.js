@@ -68,12 +68,12 @@ $(document).ready(function()
   {       
         e.preventDefault();        
         var oferta_id = $("input[name=oferta_id]").val();                  
-        var user_id = $("select[name=user_id]").val();          
-        var aula_id = $("select[name=aula_id]").val();                  
+        var user_id = document.getElementById('user_id').value;          
+        var aula_id = document.getElementById('aula_id').value;
         var nombre = $("input[name=nombre]").val();                  
         var descripcion = $("textarea[name=descripcion]").val();                   
         var observacion = $("textarea[name=observacion]").val();    
-        
+        alert(user_id);
         $.ajax({                    
                     url: '/ajaxMaterias',
                     type: 'POST',

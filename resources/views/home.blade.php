@@ -107,7 +107,8 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>          
+            <a class="collapse-item" href="{{ url('/users') }}">Datos personales</a>   
+            <a class="collapse-item" href="{{ url('/materias') }}">Contenidos</a>       
             <a class="collapse-item" href="{{ url('/notas') }}">Notas</a>             
           </div>
         </div>
